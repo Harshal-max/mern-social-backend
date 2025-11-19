@@ -99,7 +99,8 @@ io.on("connection", (socket) => {
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://mern-frontend-46k6mwim4-harshal-chavans-projects-6c598929.vercel.app"
+        "https://mern-frontend-46k6mwim4-harshal-chavans-projects-6c598929.vercel.app",
+        "https://mern-frontend-pi-ruddy.vercel.app/"
     ],
     credentials: true
 }));
