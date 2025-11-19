@@ -181,12 +181,11 @@ export const signUp = async (req, res) => {
 
         const token = await genToken(user._id)
 
-        // ✅ FIXED COOKIE SETTINGS
         res.cookie("token", token, {
             httpOnly: true,
             maxAge: 10*365*24*60*60*1000,
-            secure: process.env.NODE_ENV === "production",  // true in production
-            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax"  // "None" for cross-origin
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax"
         })
 
         return res.status(201).json(user)
@@ -213,12 +212,11 @@ export const signIn = async (req, res) => {
 
         const token = await genToken(user._id)
 
-        // ✅ FIXED COOKIE SETTINGS
         res.cookie("token", token, {
             httpOnly: true,
             maxAge: 10*365*24*60*60*1000,
-            secure: process.env.NODE_ENV === "production",  // true in production
-            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax"  // "None" for cross-origin
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax"
         })
 
         return res.status(200).json(user)
@@ -247,7 +245,7 @@ export const sendOtp = async (req, res) => {
 
         const otp = Math.floor(1000 + Math.random() * 9000).toString()
 
-        user.resetOtp = otp,
+        user.resetOtp = otp
         user.otpExpires = Date.now() + 5*60*1000
         user.isOtpVerified = false
 
@@ -298,10 +296,3 @@ export const resetPassword = async (req, res) => {
         return res.status(500).json({message: `reset otp error ${error}`})
     }
 }
-```
-
-## Add Environment Variable to Render:
-
-Go to your Render dashboard → Environment tab and add:
-```
-NODE_ENV=production
